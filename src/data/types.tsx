@@ -1,6 +1,11 @@
 interface Phonetic {
   text: string;
   audio?: string;
+  sourceUrl?: string;
+  license?: {
+    name: string;
+    url: string;
+  };
 }
 interface Definition {
   definition: string;
@@ -10,6 +15,8 @@ interface Definition {
 interface Meaning {
   partOfSpeech: string;
   definitions: Definition[];
+  synonyms?: string[];
+  antonyms?: string[];
 }
 
 interface WordData {
@@ -18,6 +25,11 @@ interface WordData {
   phonetics?: Phonetic[];
   origin: string;
   meaning?: Meaning[];
+  sourceUrls?: string[];
+  license?: {
+    name: string;
+    url: string;
+  };
 }
 
 export default WordData;

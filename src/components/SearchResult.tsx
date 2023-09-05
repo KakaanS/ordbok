@@ -1,3 +1,5 @@
+import React from "react";
+
 import WordData from "../data/types";
 
 interface ResultDisplayProps {
@@ -25,7 +27,14 @@ function ResultDisplay({ result }: ResultDisplayProps) {
                 {phonetic.text}
                 {phonetic.audio && (
                   <audio controls>
-                    <source src={`https:${phonetic.audio}`} type="audio/mpeg" />
+                    <source
+                      src={
+                        phonetic.audio.startsWith("http")
+                          ? phonetic.audio
+                          : `https://${phonetic.audio}`
+                      }
+                      type="audio/mpeg"
+                    />
                     Your browser does not support the audio element.
                   </audio>
                 )}
@@ -35,10 +44,10 @@ function ResultDisplay({ result }: ResultDisplayProps) {
         </div>
       )}
       <p>Origin: {wordData.origin}</p>
-      {wordData.meaning && wordData.meaning.length > 0 && (
+      {wordData.meanings && wordData.meanings.length > 0 && (
         <div>
-          <h3>Meaning:</h3>
-          {wordData.meaning.map((meaning, index) => (
+          <h3>Meanings:</h3>
+          {wordData.meanings.map((meaning, index) => (
             <div key={index}>
               <p>Part of Speech: {meaning.partOfSpeech}</p>
               <ul>
