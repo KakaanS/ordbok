@@ -1,5 +1,3 @@
-import React from "react";
-
 import WordData from "../data/types";
 
 interface ResultDisplayProps {
@@ -15,51 +13,12 @@ function ResultDisplay({ result }: ResultDisplayProps) {
 
   return (
     <div>
-      <h1>Result:</h1>
-      <h2>{wordData.word}</h2>
-      <p>{wordData.phonetic}</p>
-      {wordData.phonetics && wordData.phonetics.length > 0 && (
+      <h1>Searchresult:</h1>
+      <h3>The word you searched for: {wordData.word}</h3>
+      {wordData.meaning && wordData.meaning.length > 0 && (
         <div>
-          <h3>Phonetics:</h3>
-          <ul>
-            {wordData.phonetics.map((phonetic, index) => (
-              <li key={index}>
-                {phonetic.text}
-                {phonetic.audio && (
-                  <audio controls>
-                    <source
-                      src={
-                        phonetic.audio.startsWith("http")
-                          ? phonetic.audio
-                          : `https://${phonetic.audio}`
-                      }
-                      type="audio/mpeg"
-                    />
-                    Your browser does not support the audio element.
-                  </audio>
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-      <p>Origin: {wordData.origin}</p>
-      {wordData.meanings && wordData.meanings.length > 0 && (
-        <div>
-          <h3>Meanings:</h3>
-          {wordData.meanings.map((meaning, index) => (
-            <div key={index}>
-              <p>Part of Speech: {meaning.partOfSpeech}</p>
-              <ul>
-                {meaning.definitions.map((definition, defIndex) => (
-                  <li key={defIndex}>
-                    <p>Definition: {definition.definition}</p>
-                    {definition.example && <p>Example: {definition.example}</p>}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          <h3>Definition:</h3>
+          <p>{wordData.meaning[0].definitions[0].definition}</p>
         </div>
       )}
     </div>

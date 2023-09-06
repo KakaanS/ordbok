@@ -32,10 +32,7 @@ export const SearchBar = () => {
       />
       <button onClick={handleSearch}>Search</button>
       <div>
-        {result &&
-          result.map((wordData, index) => (
-            <ResultDisplay key={index} result={[wordData]} />
-          ))}
+        {result && result.length > 0 && <ResultDisplay result={result} />}
       </div>
     </div>
   );
