@@ -7,14 +7,15 @@ interface Phonetic {
     url: string;
   };
 }
-interface Definition {
+
+interface Definitions {
   definition: string;
   example?: string;
 }
 
-interface Meaning {
+interface Meanings {
   partOfSpeech: string;
-  definitions: Definition[];
+  definitions: Definitions[];
   synonyms?: string[];
   antonyms?: string[];
 }
@@ -24,7 +25,7 @@ interface WordData {
   phonetic: string;
   phonetics?: Phonetic[];
   origin: string;
-  meaning?: Meaning[];
+  meanings?: Meanings[];
   sourceUrls?: string[];
   license?: {
     name: string;

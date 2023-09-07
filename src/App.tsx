@@ -6,6 +6,7 @@ function App() {
     <>
       <div className="App">
         <SearchBar />
+        {/* <p>Hello World</p> */}
       </div>
     </>
   );
