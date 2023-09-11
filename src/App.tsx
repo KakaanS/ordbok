@@ -1,13 +1,15 @@
 import "./App.css";
 import { SearchBar } from "./components/SearchBar";
+import Favorites from "./components/favorites";
+import { FavoriteCtxProvider } from "./store/favoriteCtx";
 
 function App() {
   return (
     <>
-      <div className="App">
+      <FavoriteCtxProvider>
+        <Favorites />
         <SearchBar />
-        {/* <p>Hello World</p> */}
-      </div>
+      </FavoriteCtxProvider>
     </>
   );
 }

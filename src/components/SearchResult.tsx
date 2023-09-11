@@ -1,4 +1,5 @@
 import WordData from "../data/types.tsx";
+import { useFavoriteCtx } from "../store/favoriteCtx.tsx";
 import "../styles/search&result.css";
 
 interface ResultDisplayProps {
@@ -6,21 +7,17 @@ interface ResultDisplayProps {
 }
 
 function ResultDisplay({ result }: ResultDisplayProps) {
+  const { state, dispatch } = useFavoriteCtx();
+
   if (!result || result.length === 0) {
     return <p>No results to display.</p>;
   }
 
   const wordData = result[0];
 
-  const handleAddToFavorites = () => {
-    const favorites = localStorage.getItem("favorites");
-    if (favorites) {
-      const favoritesArray = JSON.parse(favorites);
-      favoritesArray.push(wordData);
-      localStorage.setItem("favorites", JSON.stringify(favoritesArray));
-    } else {
-      localStorage.setItem("favorites", JSON.stringify([wordData]));
-    }
+  const handleAddToFavorites = (wordData: WordData) => {
+    console.log("added data", wordData);
+    dispatch({ type: "ADD_TO_FAVORITES", payload: wordData });
   };
 
   return (
