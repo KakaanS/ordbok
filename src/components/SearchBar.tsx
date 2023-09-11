@@ -4,6 +4,8 @@ import { ChangeEvent, useState } from "react";
 import ResultDisplay from "./SearchResult";
 import WordData from "../data/types";
 
+import "../styles/search&result.css";
+
 export const SearchBar = () => {
   const [word, setWord] = useState<string>("");
   const [result, setResult] = useState<WordData[] | null>(null);
@@ -23,7 +25,7 @@ export const SearchBar = () => {
   };
 
   return (
-    <div>
+    <div className="searchbarOuterContainer">
       <input
         type="text"
         value={word}

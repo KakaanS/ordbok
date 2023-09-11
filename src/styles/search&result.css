@@ -1,0 +1,33 @@
+.searchbarOuterContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: right;
+  width: 400px;
+}
+
+.outerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  text-align: left;
+}
+.outerContainer h3 {
+  font-size: 18px;
+  margin: 0;
+  padding: 0;
+}
+
+.definitionsContainer li {
+  list-style: none;
+}
+
+.searchTitle {
+  font-size: 30px;
+  text-decoration: underline;
+}
+
+.synonymsContainer li {
+  list-style: none;
+}
