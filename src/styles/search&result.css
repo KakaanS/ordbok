@@ -1,15 +1,7 @@
-.searchbarOuterContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  width: 400px;
-}
-
 .outerContainer {
   display: flex;
   flex-direction: column;
   width: 100%;
-  text-align: left;
 }
 .outerContainer h3 {
   font-size: 18px;

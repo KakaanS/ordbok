@@ -1,1 +1,26 @@
+.appContainer {
+  display: flex;
+  flex-direction: row;
+}
 
+.lightTheme {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.darkTheme {
+  background-color: #333;
+  color: #fff;
+}
+
+.themeToggleBtn {
+  position: absolute;
+  top: 95%;
+  left: 10px;
+  background-color: gray;
+  border: none;
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+  margin: 10px;
+}

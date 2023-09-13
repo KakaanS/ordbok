@@ -3,6 +3,7 @@ import WordData from "../data/types";
 
 interface FavoriteCtxState {
   favorites: WordData[];
+  selectedWord: WordData | null;
 }
 
 type FavoriteCtxAction =
@@ -10,12 +11,18 @@ type FavoriteCtxAction =
       type: "ADD_TO_FAVORITES";
       payload: WordData;
     }
-  | { type: "REMOVE_FROM_FAVORITES"; payload: string };
+  | { type: "REMOVE_FROM_FAVORITES"; payload: string }
+  | { type: "SET_SELECTED_WORD"; payload: WordData | null };
 
 const FavoriteCtx = createContext<
-  | { state: FavoriteCtxAction; dispatch: React.Dispatch<FavoriteCtxAction> }
+  | { state: FavoriteCtxState; dispatch: React.Dispatch<FavoriteCtxAction> }
   | undefined
 >(undefined);
+
+const initialState: FavoriteCtxState = {
+  favorites: [],
+  selectedWord: null,
+};
 
 const favoriteReducer = (
   state: FavoriteCtxState,
@@ -31,10 +38,10 @@ const favoriteReducer = (
           (favorite) => favorite.word !== action.payload
         ),
       };
-    case "SET_SEARCH_TERM":
+    case "SET_SELECTED_WORD":
       return {
         ...state,
-        searchTerm: action.payload,
+        selectedWord: action.payload,
       };
     default:
       return state;
@@ -44,7 +51,7 @@ const favoriteReducer = (
 export const FavoriteCtxProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [state, dispatch] = useReducer(favoriteReducer, { favorites: [] });
+  const [state, dispatch] = useReducer(favoriteReducer, initialState);
 
   return (
     <FavoriteCtx.Provider value={{ state, dispatch }}>
