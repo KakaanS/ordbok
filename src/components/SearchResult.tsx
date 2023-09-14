@@ -14,9 +14,9 @@ function ResultDisplay({ result }: ResultDisplayProps) {
   useEffect(() => {
     if (selectedWord && selectedWord.phonetics) {
       const audioElements = document.querySelectorAll("audio");
-      audioElements.forEach((audio, index) => {
-        const phonetic = selectedWord.phonetics?.[index];
-        if (phonetic?.audio) {
+      selectedWord.phonetics.forEach((phonetic, index) => {
+        const audio = audioElements[index] as HTMLAudioElement;
+        if (phonetic?.audio && audio) {
           audio.setAttribute("src", phonetic.audio);
         }
       });
@@ -24,7 +24,7 @@ function ResultDisplay({ result }: ResultDisplayProps) {
   }, [selectedWord]);
 
   if (!result || result.length === 0) {
-    return <p>No results to display.</p>;
+    return <p>Welcome to search for a word</p>;
   }
 
   const wordData = selectedWord || result[0];
@@ -41,16 +41,41 @@ function ResultDisplay({ result }: ResultDisplayProps) {
       <h1 className="searchTitle">Search Result:</h1>
       {selectedWord ? (
         <>
-          <h3>The word you selected: {selectedWord.word}</h3>
+          <h2>{selectedWord.word}</h2>
           {selectedWord.meanings && selectedWord.meanings.length > 0 && (
             <div className="definitionsContainer">
               <h3>Definitions:</h3>
               <ul>
-                {selectedWord.meanings[0].definitions.map(
-                  (definition, index) => (
+                {selectedWord.meanings[0].definitions
+                  .slice(0, 3)
+                  .map((definition, index) => (
                     <li key={index}>{definition.definition}</li>
-                  )
-                )}
+                  ))}
+              </ul>
+            </div>
+          )}
+          {selectedWord.meanings && selectedWord.meanings.length > 0 && (
+            <div className="originContainer">
+              <h3>Part of speech:</h3>
+              <p>{selectedWord.meanings[0].partOfSpeech}</p>
+              {selectedWord.meanings.length > 1 && (
+                <p>{selectedWord.meanings[1].partOfSpeech}</p>
+              )}
+            </div>
+          )}
+          {selectedWord.meanings && selectedWord.meanings.length > 0 && (
+            <div className="synonymsContainer">
+              <h3>Synonyms:</h3>
+              <ul>
+                {selectedWord.meanings.map((meaning, meaningIndex) => (
+                  <div key={meaningIndex}>
+                    <ul>
+                      {meaning.synonyms?.slice(0, 3).map((synonym, index) => (
+                        <li key={index}>{synonym}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
               </ul>
             </div>
           )}
@@ -61,22 +86,28 @@ function ResultDisplay({ result }: ResultDisplayProps) {
               <ul>
                 {selectedWord.phonetics.map((phonetic, phoneticIndex) => (
                   <div key={phoneticIndex}>
-                    <h4>Audio {phoneticIndex + 1}</h4>
                     {phonetic?.audio && (
-                      <audio controls>
-                        <source src={phonetic.audio} type="audio/mpeg" />
-                        Your browser does not support the audio element.
-                      </audio>
+                      <>
+                        <audio controls>
+                          <source src={phonetic.audio} type="audio/mpeg" />
+                          Your browser does not support the audio element.
+                        </audio>
+                      </>
                     )}
                   </div>
                 ))}
               </ul>
             </div>
           )}
+          <div>
+            <button onClick={() => handleAddToFavorites(selectedWord)}>
+              Add to favorites
+            </button>
+          </div>
         </>
       ) : (
         <>
-          <h3>The word you searched for: {wordData.word}</h3>
+          <h2>{wordData.word}</h2>
           {wordData.meanings && wordData.meanings.length > 0 && (
             <div className="definitionsContainer">
               <h3>Definitions:</h3>
@@ -89,10 +120,13 @@ function ResultDisplay({ result }: ResultDisplayProps) {
               </ul>
             </div>
           )}
-          {wordData.origin && (
+          {wordData.meanings && wordData.meanings.length > 0 && (
             <div className="originContainer">
-              <h3>Origin:</h3>
-              <p>{wordData.origin}</p>
+              <h3>Part of speech:</h3>
+              <p>{wordData.meanings[0].partOfSpeech}</p>
+              {wordData.meanings.length > 1 && (
+                <p>{wordData.meanings[1].partOfSpeech}</p>
+              )}
             </div>
           )}
           {wordData.meanings && wordData.meanings.length > 0 && (
@@ -118,12 +152,13 @@ function ResultDisplay({ result }: ResultDisplayProps) {
               <ul>
                 {wordData.phonetics.map((phonetic, phoneticIndex) => (
                   <div key={phoneticIndex}>
-                    <h4>Audio {phoneticIndex + 1}</h4>
                     {phonetic?.audio && (
-                      <audio controls>
-                        <source src={phonetic.audio} type="audio/mpeg" />
-                        Your browser does not support the audio element.
-                      </audio>
+                      <>
+                        <audio controls>
+                          <source src={phonetic.audio} type="audio/mpeg" />
+                          Your browser does not support the audio element.
+                        </audio>
+                      </>
                     )}
                   </div>
                 ))}

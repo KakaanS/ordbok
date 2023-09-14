@@ -1,7 +1,7 @@
 import "./App.css";
 import "./styles/layout.css";
 
-import { SearchBar } from "./components/SearchBar";
+import SearchBar from "./components/SearchBar";
 import Favorites from "./components/favorites";
 import { FavoriteCtxProvider } from "./store/favoriteCtx";
 import DarkTheme from "./components/DarkTheme";

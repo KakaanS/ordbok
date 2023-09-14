@@ -8,7 +8,7 @@ import { useFavoriteCtx } from "../store/favoriteCtx";
 import "../styles/search&result.css";
 import "../styles/layout.css";
 
-export const SearchBar = () => {
+const SearchBar = () => {
   const [word, setWord] = useState<string>("");
   const [result, setResult] = useState<WordData[]>([]);
   const { dispatch } = useFavoriteCtx();
@@ -45,8 +45,10 @@ export const SearchBar = () => {
       />
       <button onClick={handleSearch}>Search</button>
       <div>
-        {result && result.length > 0 && <ResultDisplay result={result} />}
+        <ResultDisplay result={result} />
       </div>
     </div>
   );
 };
+
+export default SearchBar;
