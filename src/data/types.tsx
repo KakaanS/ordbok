@@ -24,7 +24,6 @@ interface WordData {
   word: string;
   phonetic: string;
   phonetics?: Phonetic[];
-  origin: string;
   meanings?: Meanings[];
   sourceUrls?: string[];
   license?: {

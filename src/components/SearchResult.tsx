@@ -88,7 +88,7 @@ function ResultDisplay({ result }: ResultDisplayProps) {
                   <div key={phoneticIndex}>
                     {phonetic?.audio && (
                       <>
-                        <audio controls>
+                        <audio controls data-testid="audio-element">
                           <source src={phonetic.audio} type="audio/mpeg" />
                           Your browser does not support the audio element.
                         </audio>
@@ -148,14 +148,18 @@ function ResultDisplay({ result }: ResultDisplayProps) {
 
           {wordData.phonetics && wordData.phonetics.length > 0 && (
             <div className="audioContainer">
-              <h3>Audio:</h3>
+              <h3 data-testid="audioHeader">Audio:</h3>
               <ul>
                 {wordData.phonetics.map((phonetic, phoneticIndex) => (
                   <div key={phoneticIndex}>
                     {phonetic?.audio && (
                       <>
-                        <audio controls>
-                          <source src={phonetic.audio} type="audio/mpeg" />
+                        <audio controls data-testid="audioElement">
+                          <source
+                            data-testid="sourceElement"
+                            src={phonetic.audio}
+                            type="audio/mpeg"
+                          />
                           Your browser does not support the audio element.
                         </audio>
                       </>

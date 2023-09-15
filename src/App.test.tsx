@@ -21,7 +21,10 @@ const server = setupServer(
   rest.get(
     `https://api.dictionaryapi.dev/api/v2/entries/en/${buildWord}`,
     (_req, res, ctx) => {
-      return res(ctx.json(exDataBuild));
+      console.log("API MOCK: Received request with URL", _req.url);
+      const response = ctx.json(exDataBuild);
+      console.log("API Mock: sending response data:", response);
+      return res(response);
     }
   )
 );
@@ -32,6 +35,10 @@ beforeAll(() => {
 
 afterAll(() => {
   server.close();
+});
+
+beforeEach(() => {
+  server.resetHandlers();
 });
 
 it("renders without crashing", async () => {
@@ -81,8 +88,30 @@ it("Adding a word to favorites", async () => {
   await user.click(searchButton);
   expect(screen.getByText(buildWord)).toBeInTheDocument();
 
-  const favoriteButton = screen.getByText("Add to favorites"); // Cant find this button?
+  const favoriteButton = screen.getByText("Add to favorites");
 
   await user.click(favoriteButton);
   expect(screen.getByText("Remove")).toBeInTheDocument();
+});
+
+it("fetch retrieves MP3 file", async () => {
+  render(
+    <FavoriteCtxProvider>
+      <App />
+    </FavoriteCtxProvider>
+  );
+  const user = userEvent.setup();
+  const input = screen.getByRole("textbox");
+  const searchButton = screen.getByText("Search");
+
+  await user.type(input, buildWord);
+  expect(input).toHaveValue(buildWord);
+  await user.click(searchButton);
+  expect(await screen.findByText("Search Result:")).toBeInTheDocument();
+
+  const audioElement = screen.getAllByTestId("audioElement")[0];
+  const sourceElement = screen.getAllByTestId("sourceElement")[0];
+
+  expect(audioElement).toBeInTheDocument();
+  expect(sourceElement).toHaveAttribute("type", "audio/mpeg");
 });
