@@ -1,6 +1,10 @@
 import React, { createContext, useContext, useReducer, ReactNode } from "react";
 import WordData from "../data/types";
 
+/**
+ * Context handling the favorites list and the selected word from the list.
+ */
+
 interface FavoriteCtxState {
   favorites: WordData[];
   selectedWord: WordData | null;

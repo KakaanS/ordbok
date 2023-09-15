@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
 
+/**
+ * This is the component that managing the theme of the website.
+ */
+
 interface DarkThemeProps {
   toggleTheme: () => void;
 }

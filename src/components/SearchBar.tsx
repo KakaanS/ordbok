@@ -8,6 +8,10 @@ import { useFavoriteCtx } from "../store/favoriteCtx";
 import "../styles/search&result.css";
 import "../styles/layout.css";
 
+/**
+ * This is the component that managing the search bar and you will also find the result component rendered here.
+ */
+
 const SearchBar = () => {
   const [word, setWord] = useState<string>("");
   const [result, setResult] = useState<WordData[]>([]);

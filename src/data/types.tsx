@@ -1,3 +1,7 @@
+/**
+ * Here we manage the interface for the data recieved from the API call.
+ */
+
 interface Phonetic {
   text: string;
   audio?: string;

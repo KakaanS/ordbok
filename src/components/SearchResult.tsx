@@ -3,6 +3,11 @@ import WordData from "../data/types.tsx";
 import { useFavoriteCtx } from "../store/favoriteCtx.tsx";
 import "../styles/search&result.css";
 
+/**
+ * When a search has been made, this component will display the result.
+ * If the user clicks a word from his "favorites" list, the result will also be displayed here.
+ */
+
 interface ResultDisplayProps {
   result: WordData[];
 }
