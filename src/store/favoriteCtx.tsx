@@ -64,6 +64,9 @@ export const FavoriteCtxProvider: React.FC<{ children: ReactNode }> = ({
   );
 };
 
+/* 
+eslint-disable react-refresh/only-export-components
+*/
 export const useFavoriteCtx = () => {
   const context = useContext(FavoriteCtx);
   if (context === undefined) {
