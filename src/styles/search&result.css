@@ -17,7 +17,44 @@
   font-size: 30px;
   text-decoration: underline;
 }
+.searchBar {
+  width: 100%;
+  height: 40px;
+}
+.searchBar-error {
+  border-color: red;
+}
+
+.searchBtn {
+  height: 40px;
+}
+.notFoundPopUp {
+  color: red;
+}
 
 .synonymsContainer li {
   list-style: none;
+}
+
+.redFeedback {
+  color: red;
+}
+
+.whiteFeedback {
+  color: white;
+}
+
+.resultContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.leftColumn {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.rightColumn {
+  flex: 1;
+  padding-left: 20px;
 }

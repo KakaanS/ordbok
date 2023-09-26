@@ -23,3 +23,5 @@ test("if there is a button", () => {
   const button = screen.getByRole("button");
   expect(button).toBeInTheDocument();
 });
+
+// lägg till test på om det inte finns något i input fältet.

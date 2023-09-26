@@ -14,3 +14,5 @@ test("renders favorites heading", () => {
   const favoritesHeading = screen.getByText("Favorites");
   expect(favoritesHeading).toBeInTheDocument();
 });
+
+// Testa så man inte kan
