@@ -13,9 +13,6 @@ function ResultDisplay({ result }: ResultDisplayProps) {
   const [feedbackMessage, setFeedbackMessage] = useState<string>("");
   const [wordInFavorites, setWordInFavorites] = useState<boolean>(false);
 
-  console.log("Result:", result);
-  console.log("Selected Word:", selectedWord);
-
   useEffect(() => {
     setFeedbackMessage("");
   }, [result]);
@@ -116,8 +113,12 @@ function ResultDisplay({ result }: ResultDisplayProps) {
                 {selectedWord.phonetics.map((phonetic, phoneticIndex) => (
                   <li key={phoneticIndex}>
                     {phonetic.audio && (
-                      <audio controls data-testid={"audio-element-0"}>
-                        <source src={phonetic.audio} type="audio/mpeg" />
+                      <audio controls data-testid="audioElement">
+                        <source
+                          src={phonetic.audio}
+                          type="audio/mpeg"
+                          data-testid="sourceElement"
+                        />
                         Your browser does not support the audio element.
                       </audio>
                     )}

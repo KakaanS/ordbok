@@ -5,7 +5,7 @@ import WordData from "../data/types";
  * Context handling the favorites list and the selected word from the list.
  */
 
-interface FavoriteCtxState {
+export interface FavoriteCtxState {
   favorites: WordData[];
   selectedWord: WordData | null;
 }
@@ -74,3 +74,5 @@ export const useFavoriteCtx = () => {
   }
   return context;
 };
+
+export default favoriteReducer;

@@ -1,0 +1,320 @@
+import "@testing-library/jest-dom";
+import favoriteReducer from "./favoriteCtx";
+import { FavoriteCtxState } from "./favoriteCtx";
+import WordData from "../data/types";
+
+const mockWithTwoWords = [
+  {
+    word: "build",
+    phonetic: "/bɪld/",
+    phonetics: [
+      {
+        text: "/bɪld/",
+        audio:
+          "https://api.dictionaryapi.dev/media/pronunciations/en/build-uk.mp3",
+        sourceUrl: "https://commons.wikimedia.org/w/index.php?curid=9027951",
+        license: {
+          name: "BY 3.0 US",
+          url: "https://creativecommons.org/licenses/by/3.0/us",
+        },
+      },
+      {
+        text: "/bɪld/",
+        audio:
+          "https://api.dictionaryapi.dev/media/pronunciations/en/build-us.mp3",
+        sourceUrl: "https://commons.wikimedia.org/w/index.php?curid=1749728",
+        license: {
+          name: "BY-SA 3.0",
+          url: "https://creativecommons.org/licenses/by-sa/3.0",
+        },
+      },
+    ],
+    meanings: [
+      {
+        partOfSpeech: "noun",
+        definitions: [
+          {
+            definition:
+              "The physique of a human body; constitution or structure of a human body.",
+            synonyms: [],
+            antonyms: [],
+            example: "Rugby players are of sturdy build.",
+          },
+          {
+            definition:
+              "Any of various versions of a software product as it is being developed for release to users.",
+            synonyms: [],
+            antonyms: [],
+            example:
+              "The computer company has introduced a new prototype build to beta testers.",
+          },
+          {
+            definition:
+              "Any structure, such as a building, statue, pool or forest, created by the player.",
+            synonyms: [],
+            antonyms: [],
+            example:
+              "I made a build that looked like the Parthenon in that game.",
+          },
+        ],
+        synonyms: [],
+        antonyms: [],
+      },
+      {
+        partOfSpeech: "verb",
+        definitions: [
+          {
+            definition: "To form (something) by combining materials or parts.",
+            synonyms: [],
+            antonyms: [],
+          },
+          {
+            definition:
+              "To develop or give form to (something) according to a plan or process.",
+            synonyms: [],
+            antonyms: [],
+          },
+          {
+            definition:
+              "To increase or strengthen (something) by adding gradually to.",
+            synonyms: [],
+            antonyms: [],
+          },
+          {
+            definition: "To establish a basis for (something).",
+            synonyms: [],
+            antonyms: [],
+          },
+          {
+            definition: "To form by combining materials or parts.",
+            synonyms: [],
+            antonyms: [],
+          },
+          {
+            definition: "To develop in magnitude or extent.",
+            synonyms: [],
+            antonyms: [],
+          },
+          {
+            definition: "To construct (software) by compiling its source code.",
+            synonyms: [],
+            antonyms: [],
+          },
+          {
+            definition:
+              "(of source code) To be converted into software by compilation, usually with minimal human intervention.",
+            synonyms: [],
+            antonyms: [],
+            example:
+              "This code won't build any more. Have you made any changes?",
+          },
+        ],
+        synonyms: [
+          "create",
+          "base",
+          "found",
+          "ground",
+          "construct",
+          "erect",
+          "build up",
+          "enlarge",
+          "increase",
+          "strengthen",
+        ],
+        antonyms: [
+          "demolish",
+          "destroy",
+          "ruin",
+          "wreck",
+          "decrease",
+          "dissipate",
+          "weaken",
+        ],
+      },
+    ],
+    license: {
+      name: "CC BY-SA 3.0",
+      url: "https://creativecommons.org/licenses/by-sa/3.0",
+    },
+    sourceUrls: ["https://en.wiktionary.org/wiki/build"],
+  },
+  {
+    word: "friend",
+    phonetic: "/fɹɛnd/",
+    phonetics: [
+      {
+        text: "/fɹɛnd/",
+        audio:
+          "https://api.dictionaryapi.dev/media/pronunciations/en/friend-uk.mp3",
+        sourceUrl: "https://commons.wikimedia.org/w/index.php?curid=9021864",
+        license: {
+          name: "BY 3.0 US",
+          url: "https://creativecommons.org/licenses/by/3.0/us",
+        },
+      },
+      {
+        text: "/fɹɛnd/",
+        audio:
+          "https://api.dictionaryapi.dev/media/pronunciations/en/friend-us.mp3",
+        sourceUrl: "https://commons.wikimedia.org/w/index.php?curid=857066",
+        license: {
+          name: "BY-SA 3.0",
+          url: "https://creativecommons.org/licenses/by-sa/3.0",
+        },
+      },
+    ],
+    meanings: [
+      {
+        partOfSpeech: "noun",
+        definitions: [
+          {
+            definition:
+              "A person other than a family member, spouse or lover whose company one enjoys and towards whom one feels affection.",
+            synonyms: [],
+            antonyms: [],
+            example:
+              "John and I have been friends ever since we were roommates at college.   Trust is important between friends.   I used to find it hard to make friends when I was shy.",
+          },
+          {
+            definition: "An associate who provides assistance.",
+            synonyms: [],
+            antonyms: [],
+            example:
+              "The Automobile Association is every motorist's friend.   The police is every law-abiding citizen's friend.",
+          },
+          {
+            definition:
+              "A person with whom one is vaguely or indirectly acquainted.",
+            synonyms: [],
+            antonyms: [],
+            example:
+              "a friend of a friend;  I added him as a friend on Facebook, but I hardly know him.",
+          },
+          {
+            definition: "A person who backs or supports something.",
+            synonyms: [],
+            antonyms: [],
+            example: "I’m not a friend of cheap wine.",
+          },
+          {
+            definition: "An object or idea that can be used for good.",
+            synonyms: [],
+            antonyms: [],
+            example: "Wiktionary is your friend.",
+          },
+          {
+            definition:
+              "(used only in the vocative) Used as a form of address when warning someone.",
+            synonyms: [],
+            antonyms: [],
+            example: "You’d better watch it, friend.",
+          },
+          {
+            definition:
+              "A function or class granted special access to the private and protected members of another class.",
+            synonyms: [],
+            antonyms: [],
+          },
+          {
+            definition: "A spring-loaded camming device.",
+            synonyms: [],
+            antonyms: [],
+          },
+          {
+            definition: "A lover; a boyfriend or girlfriend.",
+            synonyms: [],
+            antonyms: [],
+          },
+          {
+            definition: "A relative, a relation by blood or marriage.",
+            synonyms: [],
+            antonyms: [],
+            example: "Friends agree best at a distance.",
+          },
+        ],
+        synonyms: [
+          "buddy",
+          "buster",
+          "mate",
+          "pal",
+          "sonny",
+          "admirer",
+          "booster",
+          "champion",
+          "protagonist",
+          "supporter",
+          "ally",
+          "acquaintance",
+          "contact",
+        ],
+        antonyms: ["enemy", "foe", "stranger"],
+      },
+      {
+        partOfSpeech: "verb",
+        definitions: [
+          {
+            definition:
+              "To act as a friend to, to befriend; to be friendly to, to help.",
+            synonyms: [],
+            antonyms: [],
+          },
+          {
+            definition:
+              "To add (a person) to a list of friends on a social networking site; to officially designate (someone) as a friend.",
+            synonyms: [],
+            antonyms: [],
+          },
+        ],
+        synonyms: ["befriend"],
+        antonyms: ["defriend", "unfriend"],
+      },
+    ],
+    license: {
+      name: "CC BY-SA 3.0",
+      url: "https://creativecommons.org/licenses/by-sa/3.0",
+    },
+    sourceUrls: ["https://en.wiktionary.org/wiki/friend"],
+  },
+];
+
+describe("FavoriteCtx reducer", () => {
+  test("should handle ADD_TO_FAVORITES", async () => {
+    const initialState = {
+      favorites: [],
+      selectedWord: null,
+    };
+    const wordToAdd: WordData = mockWithTwoWords[0];
+
+    const newState = favoriteReducer(initialState, {
+      type: "ADD_TO_FAVORITES",
+      payload: wordToAdd,
+    });
+    expect(newState.favorites).toHaveLength(1);
+    expect(newState.favorites[0]).toEqual(wordToAdd);
+  });
+
+  test("should handle REMOVE_FROM_FAVORITES", async () => {
+    const initialState: FavoriteCtxState = {
+      favorites: mockWithTwoWords,
+      selectedWord: null,
+    };
+
+    const newState = favoriteReducer(initialState, {
+      type: "REMOVE_FROM_FAVORITES",
+      payload: "build",
+    });
+    expect(newState.favorites).toEqual([mockWithTwoWords[1]]);
+  });
+
+  test("should handle SET_SELECTED_WORD", async () => {
+    const intialState: FavoriteCtxState = {
+      favorites: [],
+      selectedWord: null,
+    };
+    const newState = favoriteReducer(intialState, {
+      type: "SET_SELECTED_WORD",
+      payload: mockWithTwoWords[1],
+    });
+    expect(newState.selectedWord).toEqual(mockWithTwoWords[1]);
+  });
+});
