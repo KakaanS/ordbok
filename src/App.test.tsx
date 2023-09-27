@@ -10,14 +10,8 @@ import exDataBuild from "./__test__/exampleDataBuild.json";
 import App from "./App";
 
 const buildWord = exDataBuild[0].word;
-/* const buildPhonetic = exDataBuild[0].phonetics;
-const buildPhonetics = exDataBuild[0].phonetics;
-const buildMeanings = exDataBuild[0].meanings;
-const buildDefinitions = exDataBuild[0].meanings[0].definitions;
-*/
 
 const server = setupServer(
-  // Describe the requests to mock.
   rest.get(
     `https://api.dictionaryapi.dev/api/v2/entries/en/${buildWord}`,
     (_req, res, ctx) => {
@@ -54,7 +48,7 @@ it("renders without crashing", async () => {
   await user.type(input, buildWord);
   expect(input).toHaveValue(buildWord);
   await user.click(searchButton);
-  expect(screen.getByText("Search Result:")).toBeInTheDocument();
+  expect(screen.getByText("Exact matches:")).toBeInTheDocument();
 });
 
 it("renders the word", async () => {
@@ -107,7 +101,7 @@ it("fetch retrieves MP3 file", async () => {
   await user.type(input, buildWord);
   expect(input).toHaveValue(buildWord);
   await user.click(searchButton);
-  expect(await screen.findByText("Search Result:")).toBeInTheDocument();
+  expect(await screen.findByText("Exact matches:")).toBeInTheDocument();
 
   const audioElement = screen.getAllByTestId("audioElement")[0];
   const sourceElement = screen.getAllByTestId("sourceElement")[0];

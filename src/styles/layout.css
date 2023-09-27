@@ -3,23 +3,35 @@
 }
 
 .favoritesContainer {
-  flex: 1;
+  flex: 2;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  overflow-y: auto;
-  height: 100vh;
-  width: 10vh;
   margin: 10px;
+  width: 30%;
 }
 
 .searchContainer {
-  flex: 2;
+  flex: 3;
   padding: 20px;
-  margin: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  overflow-y: auto;
-  height: 100vh;
-  width: 100vh;
+  margin: 10px;
+  width: 70%;
+  height: 100%;
+}
+
+.resultContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.leftColumn {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.rightColumn {
+  flex: 1;
+  padding-left: 20px;
 }

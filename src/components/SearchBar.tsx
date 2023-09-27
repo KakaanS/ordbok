@@ -16,22 +16,32 @@ const SearchBar = () => {
   const [word, setWord] = useState<string>("");
   const [result, setResult] = useState<WordData[]>([]);
   const { dispatch } = useFavoriteCtx();
+  const [notFoundMsg, setNotFoundMsg] = useState("");
+  const [inputError, setInputError] = useState(false);
 
   const handleSearch = async () => {
     try {
       setResult([]);
-      const data = await http.fetchWordData(word);
-      console.log("data", data);
-      console.log("3");
 
-      if (data && data.length < 0) {
-        dispatch({ type: "SET_SELECTED_WORD", payload: data[0] });
+      if (word.trim() === "") {
+        console.log("SEARCH BAR IS EMPTY");
+        setNotFoundMsg("Search bar is empty, enter a word");
+        setInputError(true);
       } else {
-        dispatch({ type: "SET_SELECTED_WORD", payload: null });
+        const data = await http.fetchWordData(word);
+
+        if (data && data.length > 0) {
+          console.log("WORD FOUND");
+          dispatch({ type: "SET_SELECTED_WORD", payload: data[0] });
+          setNotFoundMsg("");
+          setInputError(false);
+        }
+        setResult(data);
       }
-      setResult(data);
-    } catch (error) {
-      console.log("error fetching word", error);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      setInputError(true);
+      setNotFoundMsg("Error: " + error.message);
     }
   };
 
@@ -46,9 +56,13 @@ const SearchBar = () => {
         value={word}
         onChange={handleInputChange}
         placeholder="Enter a word"
+        className={`searchBar ${inputError ? "searchBar-error" : ""}`}
       />
-      <button onClick={handleSearch}>Search</button>
+      <button className="searchBtn" onClick={handleSearch}>
+        Search
+      </button>
       <div>
+        {notFoundMsg && <span className="notFoundPopUp">{notFoundMsg}</span>}
         <ResultDisplay result={result} />
       </div>
     </div>
